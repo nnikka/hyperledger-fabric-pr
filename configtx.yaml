@@ -1,0 +1,62 @@
+Organizations:
+  - &Orderer
+    Name: Orderer
+    ID: OrdererMSP
+    MSPDir: ./crypto-config/ordererOrganizations/orderer.com/msp
+
+  - &Org1
+    Name: Org1
+    ID: Org1MSP
+    MSPDir: ./crypto-config/peerOrganizations/org1.com/msp
+    AnchorPeers:
+      - Host: localhost
+        Port: 8051
+
+  - &Org2
+    Name: Org2
+    ID: Org2MSP
+    MSPDir: ./crypto-config/peerOrganizations/org2.com/msp
+    AnchorPeers:
+      - Host: localhost
+        Port: 8052
+
+Orderer: &OrdererDefaults
+
+  OrdererType: solo
+
+  Addresses:
+    - localhost:8050
+
+  BatchTimeout: 2s
+
+  BatchSize:
+    MaxMessageCount: 10
+    AbsoluteMaxBytes: 98 MB
+    PreferredMaxBytes: 512 KB
+
+  MaxChannels: 0
+
+Application: &ApplicationDefaults
+      Organizations:
+
+Channel: &ChannelDefaults
+
+Profiles:
+
+  OrdererGenesis:
+      Orderer:
+          <<: *OrdererDefaults
+          Organizations:
+              - *Orderer
+      Consortiums:
+          AirlineConsortium:
+              Organizations:
+                  - *Org1
+                  - *Org2
+  Channel:
+    Consortium: AirlineConsortium
+    Application:
+        <<: *ApplicationDefaults
+        Organizations:
+            - *Org1
+            - *Org2

@@ -1,0 +1,12 @@
+PeerOrgs:
+  - Name: Org3
+    Domain: org3.com
+    Specs:
+      - Hostname: devpeer
+        CommonName: devpeer
+    Users:
+      Count: 2
+
+
+
+      

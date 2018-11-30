@@ -1,0 +1,41 @@
+General:
+    GenesisMethod: file
+    GenesisFile: ./orderer-genesis.block
+
+    LedgerType: file
+
+    BCCSP:
+        Default: SW
+        SW:
+            HASH: SHA2
+            Security: 256
+            FileKeyStore:
+                Keystore:
+
+    LocalMSPDir: ../crypto-config/ordererOrganizations/orderer.com/orderers/orderer.orderer.com/msp
+
+    LocalMSPID: OrdererMSP
+
+    ListenAddress: 127.0.0.1
+
+    ListenPort: 8050
+
+    Keepalive:
+        ServerMinInterval: 60s
+        ServerInterval: 7200s
+        ServerTimeout: 20s
+
+    TLS:
+        Enabled: false
+
+    LogLevel: debug
+
+    LogFormat: '%{color}%{time:2006-01-02 15:04:05.000 MST} [%{module}] %{shortfunc} -> %{level:.4s} %{id:03x}%{color:reset} %{message}'
+
+FileLedger:
+    Location: /home/nnikka/Desktop/hy21/fabric-samples/testnet/orderer/ledger
+    Prefix: hyperledger-fabric-ordererledger    
+
+Debug:
+    BroadcastTraceDir: ./trace
+    DeliverTraceDir: ./trace
